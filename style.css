@@ -593,13 +593,6 @@ body.nav-open .nav-toggle-bar:last-child {
   color: #fff;
 }
 
-.contact-phone {
-  margin: 0;
-  font-size: 1.0625rem;
-  font-weight: 500;
-  color: rgba(232, 234, 239, 0.75);
-}
-
 /* Footer */
 .site-footer {
   background: var(--ink);
