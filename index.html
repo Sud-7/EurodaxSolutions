@@ -6,9 +6,12 @@
   <meta name="description" content="EuroDAX Solutions LLP — Microsoft Dynamics 365 Finance & Operations consulting, implementation, and integration.">
   <meta name="theme-color" content="#0c1222">
   <title>EuroDAX Solutions | D365 F&amp;O Experts</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="site-favicon.png?v=3">
+  <link rel="apple-touch-icon" href="site-logo-mark.png?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +19,10 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="#">EuroDAX</a>
+      <a class="logo logo-intro" href="#" aria-label="EuroDAX home">
+        <img class="logo-mark" src="site-logo-mark.png" alt="" width="52" height="52">
+        <span class="logo-text">EuroDAX</span>
+      </a>
       <nav class="nav" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#services">Services</a>
@@ -48,6 +54,20 @@
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Get in touch</a>
           <a href="#services" class="btn btn-ghost">Explore services</a>
+        </div>
+        <div class="hero-metrics" aria-label="EuroDAX delivery highlights">
+          <div>
+            <strong>24/7</strong>
+            <span>offshore support coverage</span>
+          </div>
+          <div>
+            <strong>D365</strong>
+            <span>Finance &amp; Operations focus</span>
+          </div>
+          <div>
+            <strong>Agile</strong>
+            <span>delivery with clear checkpoints</span>
+          </div>
         </div>
       </div>
     </section>
@@ -97,6 +117,39 @@
       </div>
     </section>
 
+    <section class="section delivery-section" aria-labelledby="delivery-title">
+      <div class="container split-section">
+        <div class="split-copy">
+          <p class="eyebrow section-eyebrow split-eyebrow">How we deliver</p>
+          <h2 id="delivery-title" class="section-title split-title">Structured delivery for complex D365 environments</h2>
+          <p class="section-prose split-prose">We combine consulting discipline with hands-on engineering so every engagement has clear ownership, reliable release paths, and practical documentation your internal teams can keep using.</p>
+        </div>
+        <div class="process-list">
+          <article class="process-step">
+            <span>01</span>
+            <div>
+              <h3>Discover &amp; align</h3>
+              <p>Map processes, integrations, data flows, risks, and success criteria before design decisions are locked in.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <span>02</span>
+            <div>
+              <h3>Design for maintainability</h3>
+              <p>Shape extensions, workflows, and integrations around Microsoft best practices and long-term supportability.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <span>03</span>
+            <div>
+              <h3>Build, test, stabilize</h3>
+              <p>Deliver in controlled increments with validation, release notes, knowledge transfer, and production readiness checks.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="why" class="section">
       <div class="container">
         <p class="eyebrow section-eyebrow">Why EuroDAX</p>
@@ -119,6 +172,27 @@
             <span>Fast turnaround on priorities that matter to your stakeholders</span>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <section class="section section-alt engagement-section" aria-labelledby="engagement-title">
+      <div class="container">
+        <p class="eyebrow section-eyebrow">Engagement models</p>
+        <h2 id="engagement-title" class="section-title">Flexible support for every stage of your D365 journey</h2>
+        <div class="engagement-grid">
+          <article class="engagement-item">
+            <h3>Implementation partnership</h3>
+            <p>Functional and technical support from planning through go-live, with steady delivery governance and issue visibility.</p>
+          </article>
+          <article class="engagement-item">
+            <h3>Dedicated offshore team</h3>
+            <p>Extend your internal capability with X++, integration, testing, reporting, and release support capacity.</p>
+          </article>
+          <article class="engagement-item">
+            <h3>Optimization sprint</h3>
+            <p>Target performance, backlog, integration stability, reporting gaps, and usability improvements in focused cycles.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -209,10 +283,20 @@
   </main>
 
   <footer class="site-footer">
+    <div class="container footer-cta">
+      <div>
+        <p class="eyebrow footer-kicker">Start a conversation</p>
+        <h2>Ready to make your D365 F&amp;O roadmap easier to deliver?</h2>
+      </div>
+      <a class="footer-cta-link" href="#contact">Talk to EuroDAX</a>
+    </div>
     <div class="container footer-grid">
       <div class="footer-brand-block">
-        <a class="footer-logo" href="#">EuroDAX Solutions</a>
-        <p class="footer-tagline">Business and technology consulting focused on Microsoft Dynamics 365 Finance &amp; Operations.</p>
+        <a class="footer-logo" href="#" aria-label="EuroDAX home">
+          <img src="site-logo-mark.png" alt="" width="44" height="44">
+          <span>EuroDAX Solutions</span>
+        </a>
+        <p class="footer-tagline">Business and technology consulting focused on Microsoft Dynamics 365 Finance &amp; Operations, integrations, custom development, and managed offshore support.</p>
         <div class="footer-badges" aria-label="Certifications and culture highlights">
           <span class="footer-badge">Great Place to Work</span>
           <span class="footer-badge">ISO 27001 Ready</span>
@@ -331,6 +415,78 @@
 
       render(0);
       restartAutoPlay();
+    })();
+
+    (function () {
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var header = document.querySelector('.site-header');
+      var logo = document.querySelector('.logo-intro');
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll(
+        '.hero .eyebrow, .hero-title, .hero-lead, .hero-actions, .hero-metrics div, .section > .container, .card, .process-step, .feature-list li, .engagement-item, .testimonial-slider, .testimonial-dots, .contact-showcase, .contact-card, .footer-cta, .footer-grid > div'
+      ));
+
+      if (logo) {
+        window.setTimeout(function () {
+          logo.classList.remove('logo-intro');
+        }, prefersReducedMotion ? 0 : 1400);
+      }
+
+      revealItems.forEach(function (item, index) {
+        item.classList.add('reveal');
+        item.style.setProperty('--reveal-delay', Math.min(index % 4, 3) * 80 + 'ms');
+      });
+
+      if ('IntersectionObserver' in window && !prefersReducedMotion) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+        revealItems.forEach(function (item) { observer.observe(item); });
+      } else {
+        revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+      }
+
+      function updateHeader() {
+        if (!header) return;
+        header.classList.toggle('is-scrolled', window.scrollY > 8);
+      }
+
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
+
+      if (prefersReducedMotion) return;
+
+      document.querySelectorAll('.card, .contact-card').forEach(function (panel) {
+        panel.addEventListener('pointerenter', function () {
+          if (panel.classList.contains('contact-card')) {
+            panel.classList.add('is-tracking');
+          }
+        });
+
+        panel.addEventListener('pointermove', function (event) {
+          var rect = panel.getBoundingClientRect();
+          var x = (event.clientX - rect.left) / rect.width;
+          var y = (event.clientY - rect.top) / rect.height;
+          panel.style.setProperty('--tilt-x', ((0.5 - y) * 7).toFixed(2) + 'deg');
+          panel.style.setProperty('--tilt-y', ((x - 0.5) * 7).toFixed(2) + 'deg');
+          panel.style.setProperty('--spot-x', (x * 100).toFixed(1) + '%');
+          panel.style.setProperty('--spot-y', (y * 100).toFixed(1) + '%');
+        });
+
+        panel.addEventListener('pointerleave', function () {
+          if (panel.classList.contains('contact-card')) {
+            panel.classList.remove('is-tracking');
+          }
+          panel.style.removeProperty('--tilt-x');
+          panel.style.removeProperty('--tilt-y');
+          panel.style.removeProperty('--spot-x');
+          panel.style.removeProperty('--spot-y');
+        });
+      });
     })();
   </script>
 </body>
