@@ -32,46 +32,46 @@
       <nav class="learning-nav">
         <details open>
           <summary>Environment &amp; Tooling</summary>
-          <a href="#modules">Development setup</a>
-          <a href="#modules">Visual Studio basics</a>
-          <a href="#modules">Lifecycle Services</a>
+          <a href="#development-setup" data-topic="development-setup">Development setup</a>
+          <a href="#visual-studio-basics" data-topic="visual-studio-basics">Visual Studio basics</a>
+          <a href="#lifecycle-services" data-topic="lifecycle-services">Lifecycle Services</a>
         </details>
         <details open>
           <summary>X++ Foundations</summary>
-          <a href="#modules">Classes and tables</a>
-          <a href="#modules">Forms and events</a>
-          <a href="#modules">Extensions pattern</a>
+          <a href="#classes-and-tables" data-topic="classes-and-tables">Classes and tables</a>
+          <a href="#forms-and-events" data-topic="forms-and-events">Forms and events</a>
+          <a href="#extensions-pattern" data-topic="extensions-pattern">Extensions pattern</a>
         </details>
         <details>
           <summary>Data Layer</summary>
-          <a href="#modules">Entities and staging</a>
-          <a href="#modules">Data management</a>
-          <a href="#modules">OData publishing</a>
+          <a href="#entities-and-staging" data-topic="entities-and-staging">Entities and staging</a>
+          <a href="#data-management" data-topic="data-management">Data management</a>
+          <a href="#odata-publishing" data-topic="odata-publishing">OData publishing</a>
         </details>
         <details open>
           <summary>Integrations &amp; APIs</summary>
-          <a href="#modules">Data entities &amp; OData</a>
-          <a href="#modules">Custom services</a>
-          <a href="#modules">Business events</a>
-          <a href="#modules">External APIs</a>
+          <a href="#data-entities-odata" data-topic="data-entities-odata">Data entities &amp; OData</a>
+          <a href="#custom-services" data-topic="custom-services">Custom services</a>
+          <a href="#business-events" data-topic="business-events">Business events</a>
+          <a href="#external-apis" data-topic="external-apis">External APIs</a>
         </details>
         <details>
           <summary>Reporting</summary>
-          <a href="#modules">SSRS reports</a>
-          <a href="#modules">Power BI</a>
-          <a href="#modules">Electronic reporting</a>
+          <a href="#ssrs-reports" data-topic="ssrs-reports">SSRS reports</a>
+          <a href="#power-bi" data-topic="power-bi">Power BI</a>
+          <a href="#electronic-reporting" data-topic="electronic-reporting">Electronic reporting</a>
         </details>
         <details>
           <summary>Security</summary>
-          <a href="#modules">Roles and duties</a>
-          <a href="#modules">Privileges</a>
-          <a href="#modules">Testing access</a>
+          <a href="#roles-and-duties" data-topic="roles-and-duties">Roles and duties</a>
+          <a href="#privileges" data-topic="privileges">Privileges</a>
+          <a href="#testing-access" data-topic="testing-access">Testing access</a>
         </details>
         <details>
           <summary>Quality &amp; Release</summary>
-          <a href="#modules">Unit testing</a>
-          <a href="#modules">Deployment checklist</a>
-          <a href="#modules">Production support</a>
+          <a href="#unit-testing" data-topic="unit-testing">Unit testing</a>
+          <a href="#deployment-checklist" data-topic="deployment-checklist">Deployment checklist</a>
+          <a href="#production-support" data-topic="production-support">Production support</a>
         </details>
       </nav>
 
@@ -82,6 +82,7 @@
     </aside>
 
     <main class="learning-main">
+      <div class="learning-atmosphere" aria-hidden="true"></div>
       <header class="learning-topbar">
         <button class="sidebar-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
           <span></span>
@@ -109,6 +110,31 @@
           <span><strong>10</strong> modules</span>
           <span><strong>28</strong> chapters</span>
           <span><strong>68</strong> lessons</span>
+        </div>
+      </section>
+
+      <section class="topic-page" id="topic-page" aria-live="polite">
+        <div class="topic-header">
+          <div>
+            <p class="kicker" id="topic-module">Featured topic</p>
+            <h2 id="topic-title">Development setup</h2>
+            <p id="topic-summary">Prepare a reliable D365 F&amp;O development workspace with the right tools, access, branch strategy, and validation routines.</p>
+          </div>
+          <a class="topic-action" href="mailto:info@eurodaxsolutions.com">Ask EuroDAX</a>
+        </div>
+        <div class="topic-layout">
+          <article class="topic-card">
+            <h3>What you will learn</h3>
+            <ul id="topic-learn"></ul>
+          </article>
+          <article class="topic-card">
+            <h3>Implementation notes</h3>
+            <ul id="topic-notes"></ul>
+          </article>
+          <article class="topic-card topic-wide">
+            <h3>Practical checklist</h3>
+            <ol id="topic-steps"></ol>
+          </article>
         </div>
       </section>
 
@@ -235,9 +261,42 @@
       var sidebarToggle = document.querySelector('.sidebar-toggle');
       var search = document.getElementById('learning-search');
       var cards = Array.prototype.slice.call(document.querySelectorAll('.module-card'));
+      var topicLinks = Array.prototype.slice.call(document.querySelectorAll('[data-topic]'));
+      var topicModule = document.getElementById('topic-module');
+      var topicTitle = document.getElementById('topic-title');
+      var topicSummary = document.getElementById('topic-summary');
+      var topicLearn = document.getElementById('topic-learn');
+      var topicNotes = document.getElementById('topic-notes');
+      var topicSteps = document.getElementById('topic-steps');
+      var topicPage = document.getElementById('topic-page');
       var count = document.querySelector('.result-count');
       var empty = document.querySelector('.empty-state');
       var savedTheme = localStorage.getItem('learning-theme');
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var topics = {
+        'development-setup': ['Environment & Tooling', 'Development setup', 'Prepare a reliable D365 F&O development workspace with the right tools, access, branch strategy, and validation routines.', ['Provision a cloud-hosted development VM or approved build environment.', 'Connect Visual Studio, source control, model packages, and metadata safely.', 'Understand why environment parity matters before custom development begins.'], ['Use a named model and package strategy before writing code.', 'Confirm admin access, Azure DevOps permissions, and LCS project membership early.', 'Keep development, UAT, and production responsibilities separated.'], ['Verify LCS project access and environment status.', 'Open Visual Studio as administrator and sync metadata.', 'Map the correct branch and compile the model before development.', 'Document environment name, application version, platform version, and deployed packages.']],
+        'visual-studio-basics': ['Environment & Tooling', 'Visual Studio basics', 'Use Visual Studio as the main D365 F&O development surface for metadata search, builds, debugging, and extensions.', ['Navigate Application Explorer and metadata search efficiently.', 'Create projects that keep related extensions together.', 'Use build, database sync, and debugger tools with discipline.'], ['Avoid overlayering; prefer extension objects and event handlers.', 'Run builds frequently to catch metadata and reference issues early.', 'Use labels and naming conventions from the start.'], ['Create a project for one functional change.', 'Add extension objects instead of modifying base objects.', 'Build the project and review compiler warnings.', 'Debug using breakpoints only after confirming the expected execution path.']],
+        'lifecycle-services': ['Environment & Tooling', 'Lifecycle Services', 'Use Microsoft Lifecycle Services to manage environments, deploy packages, track versions, and support release governance.', ['Understand projects, asset libraries, and environment details.', 'Read deployment history and application/platform versions.', 'Use LCS for package deployment and diagnostics.'], ['Treat LCS as the source of environment truth.', 'Keep package names and release notes clear for future support.', 'Coordinate downtime and validation windows before deployments.'], ['Check environment health and version before deployment.', 'Upload the deployable package to Asset Library.', 'Apply package to sandbox and run validation.', 'Record deployment notes and rollback considerations.']],
+        'classes-and-tables': ['X++ Foundations', 'Classes and tables', 'Build the foundation of D365 customization by understanding X++ classes, table methods, relations, indexes, and transactions.', ['Know where business logic belongs across tables, classes, and services.', 'Use table relations and indexes to preserve data quality and performance.', 'Apply transaction scope carefully with ttsBegin and ttsCommit.'], ['Keep table methods small and predictable.', 'Avoid business logic duplication between forms, tables, and services.', 'Design indexes around real query patterns, not guesswork.'], ['Identify the business entity and required fields.', 'Create or extend the table and define relations.', 'Add validation where the data is owned.', 'Test create, update, delete, and rollback behavior.']],
+        'forms-and-events': ['X++ Foundations', 'Forms and events', 'Customize forms and behavior using extensions, control events, data source events, and handlers.', ['Understand form data sources, controls, and event timing.', 'Use event handlers to add behavior without modifying standard objects.', 'Validate when UI logic should move to table or service logic.'], ['Do not put core business rules only in form events.', 'Name handlers clearly by object and purpose.', 'Test the same process through import/API if the rule is business critical.'], ['Find the target form and control or data source.', 'Create an extension or handler class.', 'Add logic at the correct event point.', 'Test with multiple user roles and data states.']],
+        'extensions-pattern': ['X++ Foundations', 'Extensions pattern', 'Use extension-based development to keep customizations upgrade-friendly and maintainable.', ['Differentiate table, form, class, enum, and data entity extensions.', 'Use Chain of Command where appropriate.', 'Know when pre/post handlers are safer than CoC.'], ['Prefer additive changes over replacing standard behavior.', 'Keep extension logic narrow and traceable.', 'Document why a handler or CoC point was chosen.'], ['Review the base object behavior.', 'Choose extension type and naming convention.', 'Implement the smallest possible change.', 'Run regression checks around the affected standard process.']],
+        'entities-and-staging': ['Data Layer', 'Entities and staging', 'Use data entities and staging tables to move validated business data into D365 F&O.', ['Understand entity fields, mappings, staging, and target tables.', 'Know how imports validate and commit data.', 'Use staging errors for controlled troubleshooting.'], ['Do not bypass business validation unless there is a governed reason.', 'Keep integration entities separate from one-time migration strategy when needed.', 'Monitor recurring jobs and execution history.'], ['Identify the target business process.', 'Choose standard entity or create a custom entity.', 'Test sample import into staging.', 'Resolve validation errors before scaling volume.']],
+        'data-management': ['Data Layer', 'Data management', 'Manage imports, exports, templates, and recurring data jobs through the Data management workspace.', ['Create data projects for repeatable movement.', 'Use templates for migration and operational loads.', 'Read execution history and error logs effectively.'], ['Split large loads by business dependency.', 'Agree ownership for source data cleansing.', 'Keep mapping versions with project documentation.'], ['Create a data project and add entities.', 'Upload a small file first and validate mapping.', 'Run import/export and inspect staging results.', 'Schedule recurring jobs only after stable test runs.']],
+        'odata-publishing': ['Data Layer', 'OData publishing', 'Expose D365 data through OData endpoints for controlled integrations and reporting scenarios.', ['Know how public data entities become OData endpoints.', 'Understand filtering, paging, and authentication constraints.', 'Design for performance and security.'], ['Do not expose unnecessary fields.', 'Use OData for suitable read/write patterns, not heavy bulk movement.', 'Test with realistic volumes and permissions.'], ['Confirm entity is public and enabled.', 'Test endpoint with authenticated client.', 'Apply filters and validate returned fields.', 'Document API limits and integration ownership.']],
+        'data-entities-odata': ['Integrations & APIs', 'Data entities & OData', 'Use data entities and OData together to support application integrations with clear contracts.', ['Design entity contracts around business processes.', 'Handle create/update scenarios through standard validation.', 'Use OData query options responsibly.'], ['Agree whether the integration is synchronous or batch-oriented.', 'Protect endpoint access with least privilege roles.', 'Keep API consumers aware of versioned changes.'], ['Map source fields to entity fields.', 'Test create, update, and error paths.', 'Review security role access.', 'Monitor integration runs after release.']],
+        'custom-services': ['Integrations & APIs', 'Custom services', 'Create custom service endpoints when standard entities do not fit the transaction or response pattern.', ['Design service contracts with request and response classes.', 'Keep service logic reusable and testable.', 'Expose only what the integration needs.'], ['Do not make custom services a shortcut around standard process rules.', 'Log meaningful errors without exposing sensitive data.', 'Version contracts when consumers depend on them.'], ['Define service operation and data contracts.', 'Implement validation and transaction scope.', 'Deploy and test with authenticated calls.', 'Document payload examples and error responses.']],
+        'business-events': ['Integrations & APIs', 'Business events', 'Use business events to notify external systems when key business actions occur in D365 F&O.', ['Understand event catalog, endpoints, and payloads.', 'Choose events for notification patterns, not data replication alone.', 'Coordinate event consumers and retry strategy.'], ['Keep downstream systems idempotent.', 'Do not assume event delivery equals process completion unless confirmed.', 'Monitor failed deliveries and endpoint health.'], ['Identify trigger process and available event.', 'Activate endpoint and subscribe event.', 'Test event payload with sample transaction.', 'Define monitoring and support ownership.']],
+        'external-apis': ['Integrations & APIs', 'External APIs', 'Connect D365 F&O with external APIs using secure, observable, and supportable integration patterns.', ['Choose synchronous, asynchronous, or middleware-based integration.', 'Handle authentication, retries, and timeout behavior.', 'Design clear error handling and support logs.'], ['Avoid direct coupling when middleware is the better control point.', 'Protect secrets in approved storage.', 'Agree retry and reconciliation rules before go-live.'], ['Document external endpoint and auth method.', 'Define payload mapping and error contract.', 'Build integration with logging and retry handling.', 'Run failure tests before production.']],
+        'ssrs-reports': ['Reporting', 'SSRS reports', 'Build operational reports with SSRS when users need printable, transactional, or document-style output.', ['Understand report data providers, contracts, and controllers.', 'Use temp tables and queries appropriately.', 'Deploy and secure reports for target users.'], ['Keep report logic efficient and traceable.', 'Avoid embedding business decisions only in report code.', 'Test layouts with real-world data sizes.'], ['Define report purpose and parameters.', 'Build data provider and dataset.', 'Design layout and labels.', 'Deploy, secure, and validate output.']],
+        'power-bi': ['Reporting', 'Power BI', 'Use Power BI for analytics, trends, and decision dashboards connected to D365 data sources.', ['Choose between BYOD, data lake, entities, and exported datasets.', 'Model measures and relationships for business readability.', 'Publish dashboards with proper refresh strategy.'], ['Do not overload transactional OData for heavy analytics.', 'Confirm data latency expectations.', 'Secure reports by role and audience.'], ['Define KPIs and grain of analysis.', 'Select data source and refresh approach.', 'Build semantic model and visuals.', 'Validate numbers with business owners.']],
+        'electronic-reporting': ['Reporting', 'Electronic reporting', 'Use Electronic reporting for configurable formats, regulatory files, and document transformations.', ['Understand model, mapping, and format layers.', 'Use configurations to reduce custom code where possible.', 'Test generated output against external requirements.'], ['Version ER configurations carefully.', 'Keep sample input/output files for audit.', 'Coordinate changes with finance and compliance teams.'], ['Identify reporting requirement and output format.', 'Create or extend ER model and mapping.', 'Configure format and destinations.', 'Validate output with real scenarios.']],
+        'roles-and-duties': ['Security', 'Roles and duties', 'Design security access using roles, duties, and privileges aligned to business responsibilities.', ['Understand the hierarchy from role to privilege.', 'Map access to job functions, not individual preference.', 'Use standard roles before creating custom ones.'], ['Keep segregation of duties visible.', 'Avoid broad admin access for operational users.', 'Document role rationale for audits.'], ['List user personas and tasks.', 'Map tasks to duties and privileges.', 'Create or extend roles only where needed.', 'Test access with sample users.']],
+        'privileges': ['Security', 'Privileges', 'Use privileges to define granular access to menu items, tables, services, and operations.', ['Know how entry points drive access.', 'Understand read, update, create, and delete permissions.', 'Trace missing access through security diagnostics.'], ['Keep privileges focused and reusable.', 'Avoid granting table permissions casually.', 'Validate API and UI access separately.'], ['Identify the entry point or operation.', 'Create or extend privilege with required access.', 'Attach privilege to duty and role.', 'Test denied and allowed paths.']],
+        'testing-access': ['Security', 'Testing access', 'Validate security with real user scenarios before deployment to reduce support noise and audit risk.', ['Use test users for each persona.', 'Confirm menus, forms, reports, and services.', 'Capture evidence for approval.'], ['Test both positive and negative scenarios.', 'Do not rely only on admin testing.', 'Include integrations if service accounts are involved.'], ['Prepare role matrix and test users.', 'Run each business scenario.', 'Record missing access and over-access.', 'Retest after role changes.']],
+        'unit-testing': ['Quality & Release', 'Unit testing', 'Use focused tests and repeatable validation routines to protect business logic and integration behavior.', ['Identify logic that can be tested outside the UI.', 'Build repeatable test data patterns.', 'Use tests to protect critical extensions.'], ['Prioritize high-risk custom logic first.', 'Keep tests readable and maintainable.', 'Combine automated checks with business UAT.'], ['Choose target class or service behavior.', 'Create test data and expected outcome.', 'Run test after changes.', 'Add regression cases for defects found.']],
+        'deployment-checklist': ['Quality & Release', 'Deployment checklist', 'Use a release checklist to reduce deployment risk and make production changes predictable.', ['Prepare packages, release notes, validation scripts, and rollback options.', 'Confirm downtime, owners, and communication windows.', 'Validate post-deployment smoke tests.'], ['Never deploy without environment/version confirmation.', 'Keep business sign-off linked to release scope.', 'Track known issues and support contacts.'], ['Confirm build package and dependencies.', 'Review deployment sequence and downtime.', 'Deploy to sandbox first.', 'Run smoke tests and publish release notes.']],
+        'production-support': ['Quality & Release', 'Production support', 'Operate D365 F&O after go-live with clear triage, monitoring, and ownership routines.', ['Classify incidents by business impact.', 'Use logs, batch history, and integration monitoring.', 'Separate fixes, workarounds, and enhancements.'], ['Keep support tickets tied to root cause analysis.', 'Communicate status in business language.', 'Convert recurring incidents into backlog improvements.'], ['Capture issue, user, time, and transaction details.', 'Check batch, integration, and error logs.', 'Apply workaround or fix route.', 'Document resolution and prevention action.']]
+      };
 
       function setTheme(theme) {
         root.dataset.theme = theme;
@@ -264,6 +323,52 @@
         });
       }
 
+      function fillList(node, items, ordered) {
+        node.innerHTML = items.map(function (item) {
+          return '<li>' + item + '</li>';
+        }).join('');
+      }
+
+      function renderTopic(key) {
+        var topic = topics[key] || topics['development-setup'];
+        if (topicPage && !prefersReducedMotion) {
+          topicPage.classList.remove('is-switching');
+          void topicPage.offsetWidth;
+          topicPage.classList.add('is-switching');
+        }
+        topicModule.textContent = topic[0];
+        topicTitle.textContent = topic[1];
+        topicSummary.textContent = topic[2];
+        fillList(topicLearn, topic[3]);
+        fillList(topicNotes, topic[4]);
+        fillList(topicSteps, topic[5], true);
+        topicLinks.forEach(function (link) {
+          var active = link.dataset.topic === key;
+          link.classList.toggle('is-current', active);
+          if (active) {
+            link.setAttribute('aria-current', 'page');
+            link.closest('details').open = true;
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      function renderFromHash() {
+        var key = window.location.hash.replace('#', '') || 'development-setup';
+        if (!topics[key]) key = 'development-setup';
+        renderTopic(key);
+      }
+
+      topicLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (document.body.classList.contains('sidebar-open')) {
+            document.body.classList.remove('sidebar-open');
+            sidebarToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
       function filterCards() {
         var query = search.value.trim().toLowerCase();
         var visible = 0;
@@ -278,6 +383,29 @@
       }
 
       if (search) search.addEventListener('input', filterCards);
+      window.addEventListener('hashchange', renderFromHash);
+      renderFromHash();
+
+      if (!prefersReducedMotion) {
+        cards.forEach(function (card) {
+          card.addEventListener('pointermove', function (event) {
+            var rect = card.getBoundingClientRect();
+            var x = (event.clientX - rect.left) / rect.width;
+            var y = (event.clientY - rect.top) / rect.height;
+            card.style.setProperty('--tilt-x', ((0.5 - y) * 5).toFixed(2) + 'deg');
+            card.style.setProperty('--tilt-y', ((x - 0.5) * 5).toFixed(2) + 'deg');
+            card.style.setProperty('--spot-x', (x * 100).toFixed(1) + '%');
+            card.style.setProperty('--spot-y', (y * 100).toFixed(1) + '%');
+          });
+
+          card.addEventListener('pointerleave', function () {
+            card.style.removeProperty('--tilt-x');
+            card.style.removeProperty('--tilt-y');
+            card.style.removeProperty('--spot-x');
+            card.style.removeProperty('--spot-y');
+          });
+        });
+      }
     })();
   </script>
 </body>
