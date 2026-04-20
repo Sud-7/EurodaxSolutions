@@ -233,12 +233,12 @@ input {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto minmax(360px, 860px) minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   justify-content: stretch;
   align-items: center;
   gap: 1rem;
-  min-height: 76px;
-  padding: 0.9rem clamp(1rem, 3vw, 2rem);
+  min-height: 56px;
+  padding: 0.45rem clamp(1rem, 3vw, 2rem);
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   backdrop-filter: blur(18px);
@@ -305,7 +305,7 @@ input {
 }
 
 .theme-toggle {
-  grid-column: 4;
+  justify-self: end;
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
@@ -349,7 +349,7 @@ input {
   align-items: end;
   justify-content: space-between;
   gap: 2rem;
-  margin-top: 1.6rem;
+  margin-top: 0.8rem;
   padding: clamp(1.35rem, 3vw, 2rem);
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -716,10 +716,25 @@ input {
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
 }
 
+.quick-links .quick-link-youtube {
+  color: #ff0000;
+}
+
+.quick-links .quick-link-email {
+  color: #0078d4;
+}
+
 .quick-links a:hover {
-  background: var(--accent);
   color: #fff;
   transform: translateY(-3px);
+}
+
+.quick-links .quick-link-youtube:hover {
+  background: #ff0000;
+}
+
+.quick-links .quick-link-email:hover {
+  background: #0078d4;
 }
 
 .quick-links svg {
